@@ -1,0 +1,68 @@
+{
+	"name": "react-auth-hook",
+	"version": "0.1.0",
+	"description": "A small library for authenticating users in React using Auth0",
+	"keywords": [
+		"javascript",
+		"typescript",
+		"react",
+		"auth0"
+	],
+	"author": "Michael Nissen <m9ssen@gmail.com>",
+	"license": "MIT",
+	"main": "./lib/index.js",
+	"types": "./lib/index.d.ts",
+	"scripts": {
+		"build": "tsc"
+	},
+	"directories": {
+		"src": "src",
+		"test": "__tests__"
+	},
+	"files": [
+		"lib/**/*",
+		"README.md",
+		"package.json"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/qruzz/react-auth-hook.git"
+	},
+	"bugs": {
+		"url": "https://github.com/qruzz/react-auth-hook/issues"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^8.1.0",
+		"@commitlint/config-conventional": "^8.1.0",
+		"@types/auth0-js": "^9.10.6",
+		"@types/react": "^16.9.2",
+		"husky": "^3.0.4",
+		"lint-staged": "^9.2.5",
+		"prettier": "^1.18.2",
+		"typescript": "^3.6.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+			"pre-push": "yarn test"
+		}
+	},
+	"lint-staged": {
+		"./**/*.{js,jsx,ts,tsx,json,yml,yaml,md,mdx,graphql}": [
+			"prettier --write",
+			"git add"
+		]
+	},
+	"dependencies": {
+		"auth0-js": "^9.11.3",
+		"immer": "^3.2.0",
+		"use-immer": "^0.3.3"
+	},
+	"peerDependencies": {
+		"react": "^16.9.0"
+	}
+}
