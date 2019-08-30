@@ -27,6 +27,7 @@ export function AuthProvider({
 	navigate,
 	children,
 }: AuthProvider) {
+	// Holds the initial entry point URL to the page
 	const callbackDomain = window
 		? `${window.location.protocol}//${window.location.host}`
 		: 'http://localhost:3000';
@@ -40,6 +41,7 @@ export function AuthProvider({
 		scope: 'openid profile email',
 	});
 
+	// Reducer for containing the authentication state
 	const [state, dispatch] = useImmerReducer<AuthState, AuthAction>(
 		authReducer,
 		{
@@ -57,10 +59,13 @@ export function AuthProvider({
 		navigate,
 	});
 
+	// Lift the context value into the parent's state to avoid triggering
+	// unintentional renders in the consumers
 	useEffect(() => {
 		setContextValue({ ...contextValue, state });
 	}, [state]);
 
+	// Check the session to see if a user is authenticated on mount
 	useEffect(() => {
 		auth0Client.checkSession({}, (error, authResult) => {
 			if (error) {
