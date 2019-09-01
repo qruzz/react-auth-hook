@@ -60,6 +60,7 @@
 	"dependencies": {
 		"auth0-js": "^9.11.3",
 		"immer": "^3.2.0",
+		"react-auth-hook": "^1.0.0",
 		"use-immer": "^0.3.3"
 	},
 	"peerDependencies": {

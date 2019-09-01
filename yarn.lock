@@ -1663,6 +1663,15 @@ quick-lru@^1.0.0:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
   integrity sha1-Q2CxfGETatOAeDl/8RQW4Ybc+7g=
 
+react-auth-hook@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-auth-hook/-/react-auth-hook-1.0.0.tgz#0374a6fb1b92f9bf23d53528eddca5db61f16be7"
+  integrity sha512-Y/9Q5CEsCRxezCmIHjrFVATulRSNQYGpGByUo5e6ao1r020Gm/b9cSkcS9FO9NeUjdmuo6RJhqafwUw7r+LDUQ==
+  dependencies:
+    auth0-js "^9.11.3"
+    immer "^3.2.0"
+    use-immer "^0.3.3"
+
 read-pkg-up@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/read-pkg-up/-/read-pkg-up-3.0.0.tgz#3ed496685dba0f8fe118d0691dc51f4a1ff96f07"
