@@ -1,6 +1,6 @@
 {
 	"name": "react-auth-hook",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A small library for authenticating users in React using Auth0",
 	"keywords": [
 		"javascript",
