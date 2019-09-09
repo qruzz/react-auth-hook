@@ -14,17 +14,10 @@
 
 ## Table of Content
 
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [Documentation](#documentation)
-  - [`AuthProvider`](#authprovider)
-  - [`useAuth`](#useauth)
-    - [`login`](#login)
-    - [`logout`](#logout)
-    - [`handleAuth`](#handleauth)
-    - [`isAuthenticated`](#isauthenticated)
-    - [`user`](#user)
-    - [`authResult`](#authresult)
+- [Table of Content](#table-of-content)
+- [Getting Started](#getting-started) - [Configuring Auth0](#configuring-auth0) - [Allowed Callback URLs](#allowed-callback-urls) - [Allowed Web Origins](#allowed-web-origins) - [Allowed Logout URLs](#allowed-logout-urls)
+- [Usage](#usage) - [1. Configure `AuthProvider`](#1-configure-authprovider) - [2. Handle the Callback](#2-handle-the-callback)
+- [Documentation](#documentation) - [`AuthProvider`](#authprovider) - [Default Auth0 Configuration](#default-auth0-configuration) - [`useAuth`](#useauth) - [`login`](#login) - [`logout`](#logout) - [`handleAuth`](#handleauth) - [`isAuthenticated`](#isauthenticated) - [`user`](#user) - [`authResult`](#authresult)
 - [Issues](#issues)
 
 ## Getting Started
@@ -142,6 +135,15 @@ The `AuthProvider` component implements the `AuthProvider` interface and takes a
 interface AuthProvider {
 	auth0Domain: string;
 	auth0ClientId: string;
+	auth0Params?: Omit<
+		Auth0.AuthOptions,
+		| 'domain'
+		| 'clientId'
+		| 'redirectUri'
+		| 'audience'
+		| 'responseType'
+		| 'scope'
+	>;
 	navigate: any;
 	children: React.ReactNode;
 }
@@ -151,6 +153,7 @@ As can be seen from the type interface, the `AuthProvider` API takes a couple of
 
 - `auth0Domain` _the auth domain from your Auth0 application_
 - `auth0ClientId` _the client id from your Auth0 application_
+- `auth0Params` _additional parameters to pass to `Auth0.WebAuth`_
 - `navigate` _your routers navigation function used for redirects_
 
 #### Default Auth0 Configuration
@@ -171,6 +174,7 @@ const auth0Client = new Auth0.WebAuth({
 	audience: `https://${auth0Domain}/api/v2/`,
 	responseType: 'token id_token',
 	scope: 'openid profile email',
+	...auth0Params,
 });
 ```
 
