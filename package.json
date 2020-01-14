@@ -14,7 +14,8 @@
 	"types": "./lib/index.d.ts",
 	"scripts": {
 		"dev": "tsc --watch",
-		"build": "tsc"
+		"build": "tsc",
+		"test": "echo 0"
 	},
 	"directories": {
 		"src": "src",
