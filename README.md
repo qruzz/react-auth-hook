@@ -142,6 +142,15 @@ The `AuthProvider` component implements the `AuthProvider` interface and takes a
 interface AuthProvider {
 	auth0Domain: string;
 	auth0ClientId: string;
+	auth0Params?: Omit<
+		Auth0.AuthOptions,
+		| 'domain'
+		| 'clientId'
+		| 'redirectUri'
+		| 'audience'
+		| 'responseType'
+		| 'scope'
+	>;
 	navigate: any;
 	children: React.ReactNode;
 }
@@ -151,6 +160,7 @@ As can be seen from the type interface, the `AuthProvider` API takes a couple of
 
 - `auth0Domain` _the auth domain from your Auth0 application_
 - `auth0ClientId` _the client id from your Auth0 application_
+- `auth0Params` _additional parameters to pass to `Auth0.WebAuth`_
 - `navigate` _your routers navigation function used for redirects_
 
 #### Default Auth0 Configuration
