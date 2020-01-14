@@ -17,6 +17,15 @@ export const AuthContext = React.createContext<AuthContext>({} as AuthContext);
 export interface AuthProvider {
 	auth0Domain: string;
 	auth0ClientId: string;
+	auth0Params?: Omit<
+		Auth0.AuthOptions,
+		| 'domain'
+		| 'clientId'
+		| 'redirectUri'
+		| 'audience'
+		| 'responseType'
+		| 'scope'
+	>;
 	navigate: any;
 	children: React.ReactNode;
 }
@@ -24,6 +33,7 @@ export interface AuthProvider {
 export function AuthProvider({
 	auth0Domain,
 	auth0ClientId,
+	auth0Params,
 	navigate,
 	children,
 }: AuthProvider) {
@@ -39,6 +49,7 @@ export function AuthProvider({
 		audience: `https://${auth0Domain}/api/v2/`,
 		responseType: 'token id_token',
 		scope: 'openid profile email',
+		...auth0Params,
 	});
 
 	// Reducer for containing the authentication state
