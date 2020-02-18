@@ -37,14 +37,14 @@
 		"url": "https://github.com/qruzz/react-auth-hook/issues"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^8.1.0",
-		"@commitlint/config-conventional": "^8.1.0",
-		"@types/auth0-js": "^9.10.6",
-		"@types/react": "^16.9.2",
-		"husky": "^3.0.4",
-		"lint-staged": "^9.2.5",
-		"prettier": "^1.18.2",
-		"typescript": "^3.6.2"
+		"@commitlint/cli": "^8.3.5",
+		"@commitlint/config-conventional": "^8.3.4",
+		"@types/auth0-js": "^9.12.4",
+		"@types/react": "^16.9.20",
+		"husky": "^4.2.3",
+		"lint-staged": "^10.0.7",
+		"prettier": "^1.19.1",
+		"typescript": "^3.7.5"
 	},
 	"husky": {
 		"hooks": {
@@ -59,12 +59,13 @@
 		]
 	},
 	"dependencies": {
-		"auth0-js": "^9.11.3",
-		"immer": "^3.2.0",
-		"react-auth-hook": "^1.0.0",
-		"use-immer": "^0.3.3"
+		"immer": "^5.3.6",
+		"react-auth-hook": "^1.0.2",
+		"use-immer": "^0.3.5"
 	},
 	"peerDependencies": {
-		"react": "^16.9.0"
+		"auth0-js": "^9.12.2",
+		"firebase": "^7.8.2",
+		"react": "^16.12.0"
 	}
 }
