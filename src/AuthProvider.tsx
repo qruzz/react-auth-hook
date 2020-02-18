@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Auth0 from 'auth0-js';
 import { useImmerReducer } from 'use-immer';
 import { authReducer, AuthState, AuthAction } from './authReducer';
@@ -27,6 +27,7 @@ export interface AuthProvider {
 		| 'scope'
 	>;
 	navigate: any;
+	shouldStoreResult?: boolean;
 	children: React.ReactNode;
 }
 
@@ -35,6 +36,7 @@ export function AuthProvider({
 	auth0ClientId,
 	auth0Params,
 	navigate,
+	shouldStoreResult = false,
 	children,
 }: AuthProvider) {
 	// Holds the initial entry point URL to the page
@@ -72,12 +74,12 @@ export function AuthProvider({
 
 	// Lift the context value into the parent's state to avoid triggering
 	// unintentional renders in the consumers
-	useEffect(() => {
+	React.useEffect(() => {
 		setContextValue({ ...contextValue, state });
 	}, [state]);
 
 	// Check the session to see if a user is authenticated on mount
-	useEffect(() => {
+	React.useEffect(() => {
 		auth0Client.checkSession({}, (error, authResult) => {
 			if (error) {
 				dispatch({
@@ -86,7 +88,12 @@ export function AuthProvider({
 					error,
 				});
 			} else {
-				handleAuthResult({ dispatch, auth0Client, authResult });
+				handleAuthResult({
+					dispatch,
+					auth0Client,
+					authResult,
+					shouldStoreResult,
+				});
 			}
 		});
 	}, []);

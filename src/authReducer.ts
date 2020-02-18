@@ -10,14 +10,19 @@ export type AuthState = {
 };
 
 export type AuthAction =
-	| { type: 'LOGIN_USER'; user: Auth0UserProfile; authResult: Auth0DecodedHash }
+	| {
+			type: 'LOGIN_USER';
+			user: Auth0UserProfile;
+			authResult: Auth0DecodedHash;
+			shouldStoreResult: boolean;
+	  }
 	| { type: 'LOGOUT_USER' }
 	| { type: 'AUTH_ERROR'; errorType: string; error: Error | Auth0Error };
 
 export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 	switch (action.type) {
 		case 'LOGIN_USER':
-			const { authResult, user } = action;
+			const { authResult, user, shouldStoreResult } = action;
 
 			// The time at which the user session expires
 			const expiresOn = authResult.expiresIn
@@ -27,6 +32,9 @@ export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 			if (localStorage) {
 				localStorage.setItem('EXPIRES_ON', JSON.stringify(expiresOn));
 				localStorage.setItem('AUTH0_USER', JSON.stringify(user));
+				if (shouldStoreResult) {
+					localStorage.setItem('AUTH0_RESULT', JSON.stringify(authResult));
+				}
 			}
 
 			return {
@@ -38,7 +46,9 @@ export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 			if (localStorage) {
 				localStorage.removeItem('EXPIRES_ON');
 				localStorage.removeItem('AUTH0_USER');
+				localStorage.removeItem('AUTH0_RESULT');
 			}
+
 			return {
 				user: null,
 				expiresOn: null,

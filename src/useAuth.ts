@@ -10,7 +10,7 @@ import { AuthContext } from './AuthProvider';
 export interface UseAuth {
 	login: () => void;
 	logout: () => void;
-	handleAuth: (returnRoute?: string) => void;
+	handleAuth: (returnRoute?: string, shouldStoreResult?: boolean) => void;
 	isAuthenticated: () => boolean;
 	user: Maybe<Auth0UserProfile>;
 	authResult: Maybe<Auth0DecodedHash>;
@@ -25,6 +25,7 @@ export interface HandleAuthTokenOptions {
 	error?: Maybe<Auth0Error | Auth0.Auth0ParseHashError>;
 	auth0Client: Auth0.WebAuth;
 	authResult: Maybe<Auth0DecodedHash>;
+	shouldStoreResult: boolean;
 }
 
 export type AuthResult = {
@@ -106,10 +107,19 @@ export function useAuth(): UseAuth {
 	 * }
 	 * ```
 	 */
-	function handleAuth(returnRoute: string = '/') {
+	function handleAuth(
+		returnRoute: string = '/',
+		shouldStoreResult: boolean = false
+	) {
 		if (window) {
 			auth0Client.parseHash(async (error, authResult) => {
-				await handleAuthResult({ error, auth0Client, authResult, dispatch });
+				await handleAuthResult({
+					error,
+					auth0Client,
+					authResult,
+					dispatch,
+					shouldStoreResult,
+				});
 
 				navigate(returnRoute);
 			});
@@ -152,9 +162,15 @@ export async function handleAuthResult({
 	auth0Client,
 	error,
 	authResult,
+	shouldStoreResult,
 }: HandleAuthTokenOptions) {
 	if (authResult && authResult.accessToken && authResult.idToken) {
-		await setAuthSession({ dispatch, auth0Client, authResult });
+		await setAuthSession({
+			dispatch,
+			auth0Client,
+			authResult,
+			shouldStoreResult,
+		});
 
 		return true;
 	} else if (error) {
@@ -172,6 +188,7 @@ async function setAuthSession({
 	dispatch,
 	auth0Client,
 	authResult,
+	shouldStoreResult,
 }: SetAuthSessionOptions) {
 	return new Promise((resolve: (user: Auth0UserProfile) => void, reject) => {
 		if (authResult.accessToken) {
@@ -188,6 +205,7 @@ async function setAuthSession({
 						type: 'LOGIN_USER',
 						authResult,
 						user,
+						shouldStoreResult,
 					});
 					resolve(user);
 				}
