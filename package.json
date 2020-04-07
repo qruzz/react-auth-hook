@@ -62,10 +62,12 @@
 		"immer": "^5.3.6",
 		"react-auth-hook": "^1.0.2",
 		"use-immer": "^0.3.5"
+		"auth0-js": "^9.12.2",
+	},
+	"devDependencies": {
+		"@types/auth0-js": "^9.12.4"
 	},
 	"peerDependencies": {
-		"auth0-js": "^9.12.2",
-		"firebase": "^7.8.2",
 		"react": "^16.12.0"
 	}
 }
