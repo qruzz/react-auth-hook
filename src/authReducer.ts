@@ -30,10 +30,19 @@ export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 				: null;
 
 			if (localStorage) {
-				localStorage.setItem('EXPIRES_ON', JSON.stringify(expiresOn));
-				localStorage.setItem('AUTH0_USER', JSON.stringify(user));
+				localStorage.setItem(
+					'react-auth-hook:EXPIRES_ON',
+					JSON.stringify(expiresOn)
+				);
+				localStorage.setItem(
+					'react-auth-hook:AUTH0_USER',
+					JSON.stringify(user)
+				);
 				if (shouldStoreResult) {
-					localStorage.setItem('AUTH0_RESULT', JSON.stringify(authResult));
+					localStorage.setItem(
+						'react-auth-hook:AUTH0_RESULT',
+						JSON.stringify(authResult)
+					);
 				}
 			}
 
@@ -44,9 +53,9 @@ export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 			};
 		case 'LOGOUT_USER':
 			if (localStorage) {
-				localStorage.removeItem('EXPIRES_ON');
-				localStorage.removeItem('AUTH0_USER');
-				localStorage.removeItem('AUTH0_RESULT');
+				localStorage.removeItem('react-auth-hook:EXPIRES_ON');
+				localStorage.removeItem('react-auth-hook:AUTH0_USER');
+				localStorage.removeItem('react-auth-hook:AUTH0_RESULT');
 			}
 
 			return {
