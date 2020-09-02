@@ -14,7 +14,7 @@ export type AuthAction =
 			type: 'LOGIN_USER';
 			user: Auth0UserProfile;
 			authResult: Auth0DecodedHash;
-			shouldStoreResult: boolean;
+			shouldStoreResult?: boolean;
 	  }
 	| { type: 'LOGOUT_USER' }
 	| { type: 'AUTH_ERROR'; errorType: string; error: Error | Auth0Error };
@@ -22,7 +22,7 @@ export type AuthAction =
 export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 	switch (action.type) {
 		case 'LOGIN_USER':
-			const { authResult, user, shouldStoreResult } = action;
+			const { authResult, user, shouldStoreResult = false } = action;
 
 			// The time at which the user session expires
 			const expiresOn = authResult.expiresIn
