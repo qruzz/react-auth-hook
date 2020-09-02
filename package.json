@@ -37,14 +37,14 @@
 		"url": "https://github.com/qruzz/react-auth-hook/issues"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^8.3.5",
-		"@commitlint/config-conventional": "^8.3.4",
-		"@types/auth0-js": "^9.12.4",
-		"@types/react": "^16.9.20",
-		"husky": "^4.2.3",
-		"lint-staged": "^10.0.7",
-		"prettier": "^1.19.1",
-		"typescript": "^3.7.5"
+		"@commitlint/cli": "^9.1.2",
+		"@commitlint/config-conventional": "^9.1.2",
+		"@types/auth0-js": "^9.13.4",
+		"@types/react": "^16.9.49",
+		"husky": "^4.2.5",
+		"lint-staged": "^10.2.13",
+		"prettier": "^2.1.1",
+		"typescript": "^4.0.2"
 	},
 	"husky": {
 		"hooks": {
@@ -54,18 +54,15 @@
 	},
 	"lint-staged": {
 		"./**/*.{js,jsx,ts,tsx,json,yml,yaml,md,mdx,graphql}": [
-			"prettier --write",
-			"git add"
+			"prettier --write"
 		]
 	},
 	"dependencies": {
-		"immer": "^5.3.6",
-		"react-auth-hook": "^1.0.2",
-		"use-immer": "^0.3.5"
+		"immer": "^7.0.8",
+		"use-immer": "^0.4.1",
+		"auth0-js": "^9.13.4"
 	},
 	"peerDependencies": {
-		"auth0-js": "^9.12.2",
-		"firebase": "^7.8.2",
-		"react": "^16.12.0"
+		"react": "^16.13.1"
 	}
 }
