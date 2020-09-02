@@ -7,6 +7,8 @@ export type AuthState = {
 	user: Maybe<Auth0UserProfile>;
 	authResult: Maybe<Auth0DecodedHash>;
 	expiresOn: Maybe<number>;
+	errorType?: string;
+	error?: Error | Auth0Error;
 };
 
 export type AuthAction =
@@ -65,8 +67,7 @@ export function authReducer(state: Draft<AuthState>, action: AuthAction) {
 			};
 		case 'AUTH_ERROR':
 			const { errorType, error } = action;
-			// TODO: There seems to be errors here even when things work as expected
-			// TODO: Should look into that and try to fix
+
 			return {
 				user: null,
 				expiresOn: null,
