@@ -73,7 +73,7 @@ After logging out your users will need to be redirected back from Auth0. Provide
 
 ## Usage
 
-To use this library and the `useAuth` hook, you first need to wrap you application in an `AuthProvider` component to configure the Auth0 client and share state between components.
+To use this library and the `useAuth` hook, you first need to wrap your application in an `AuthProvider` component to configure the Auth0 client and share state between components.
 
 ### 1. Configure `AuthProvider`
 
@@ -108,7 +108,7 @@ Auth0 use [OAuth](https://oauth.net/2/) which required you to redirect your user
 The simplest way to handle the callback is to create a page for it:
 
 ```js
-// src/components/AuthCallback
+// src/pages/AuthCallback
 
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
@@ -131,6 +131,28 @@ export function AuthCallback(props: RouteComponentProps) {
 ```
 
 The purpose of this page is to show some "loading" state and then run the `handleAuth` method from `useAuth` on page load. The function will automatically redirect the user to the root route (`/`).
+
+### 3. Authenticating Users
+
+Now you are done with the hard part that is configuring the Auth0 and the library. Now all that is left to do, is to authenticate your users in your application:
+
+```ts
+// src/pages/Home
+
+import React from 'react';
+import { useAuth } from 'react-auth-hook';
+
+export function Home() {
+	const { isAuthenticated, login, logout } = useAuth();
+	return isAuthenticated() ? (
+		<button onClick={login}>log in</button>
+	) : (
+		<button onClick={logout}>log out</button>
+	);
+}
+```
+
+For a full example, check out the [examples](https://github.com/qruzz/react-auth-hook/tree/master/examples) folder in this repository.
 
 ## Documentation
 
@@ -237,7 +259,21 @@ The `user` object contains the Auth0 user profile returned when the users is suc
 
 #### `authResult`
 
-The `authResult` object contains the decoded Auth0 hash which is the object returned by the [`parseHash`]() function. It implements the `Auth0DecodedHash` interface. A detailed description of the interface can be found in the [`auth0-js` types](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/auth0-js/index.d.ts?ts=3#L594).
+The `authResult` object contains the decoded Auth0 hash which is the object returned by the [`parseHash`]() function. It implements the `Auth0DecodedHash` interface which you can see here:
+
+```ts
+interface Auth0DecodedHash {
+	accessToken?: string;
+	idToken?: string;
+	idTokenPayload?: any;
+	appState?: any;
+	refreshToken?: string;
+	state?: string;
+	expiresIn?: number;
+	tokenType?: string;
+	scope?: string;
+}
+```
 
 ## Issues
 
