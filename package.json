@@ -39,13 +39,12 @@
 	"devDependencies": {
 		"@commitlint/cli": "^9.1.2",
 		"@commitlint/config-conventional": "^9.1.2",
-		"@testing-library/react": "^10.4.9",
-		"@types/auth0-js": "^9.13.4",
-		"@types/jest": "^26.0.12",
+		"@testing-library/react": "^11.0.1",
+		"@types/jest": "^26.0.13",
 		"@types/react": "^16.9.49",
 		"husky": "^4.2.5",
 		"jest": "^26.4.2",
-		"lint-staged": "^10.2.13",
+		"lint-staged": "^10.3.0",
 		"prettier": "^2.1.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
@@ -66,7 +65,8 @@
 	"dependencies": {
 		"auth0-js": "^9.13.4",
 		"immer": "^7.0.8",
-		"use-immer": "^0.4.1"
+		"use-immer": "^0.4.1",
+		"@types/auth0-js": "^9.13.4"
 	},
 	"peerDependencies": {
 		"react": "^16.13.1"
