@@ -25,7 +25,7 @@ export interface HandleAuthTokenOptions {
 	error?: Maybe<Auth0Error | Auth0.Auth0ParseHashError>;
 	auth0Client: Auth0.WebAuth;
 	authResult: Maybe<Auth0DecodedHash>;
-	shouldStoreResult: boolean;
+	shouldStoreResult?: boolean;
 }
 
 export type AuthResult = {
@@ -111,7 +111,7 @@ export function useAuth(): UseAuth {
 		returnRoute: string = '/',
 		shouldStoreResult: boolean = false
 	) {
-		if (window) {
+		if (typeof window !== 'undefined') {
 			auth0Client.parseHash(async (error, authResult) => {
 				await handleAuthResult({
 					error,
@@ -162,7 +162,7 @@ export async function handleAuthResult({
 	auth0Client,
 	error,
 	authResult,
-	shouldStoreResult,
+	shouldStoreResult = false,
 }: HandleAuthTokenOptions) {
 	if (authResult && authResult.accessToken && authResult.idToken) {
 		await setAuthSession({
